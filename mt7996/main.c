@@ -1611,7 +1611,7 @@ out:
 
 static void mt7996_link_sta_rc_update(struct ieee80211_hw *hw,
 				      struct ieee80211_vif *vif,
-				      struct ieee80211_link_sta *link_sta,
+				      struct ieee80211_sta *link_sta,
 				      u32 changed)
 {
 	struct mt7996_dev *dev = mt7996_hw_dev(hw);
