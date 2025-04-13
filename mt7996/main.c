@@ -1616,7 +1616,7 @@ static void mt7996_sta_rc_update(struct ieee80211_hw *hw,
 {
 struct mt7996_dev *dev = mt7996_hw_dev(hw);
 
-mt7996_sta_rc_work(&changed, sta);
+mt7996_link_rate_ctrl_update(&changed, sta);
 ieee80211_queue_work(hw, &dev->rc_work);
 }
 
