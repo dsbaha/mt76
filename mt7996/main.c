@@ -1609,16 +1609,15 @@ out:
 	rcu_read_unlock();
 }
 
-static void mt7996_link_sta_rc_update(struct ieee80211_hw *hw,
-				      struct ieee80211_vif *vif,
-				      struct ieee80211_sta *link_sta,
-				      u32 changed)
+static void mt7996_sta_rc_update(struct ieee80211_hw *hw,
+	struct ieee80211_vif *vif,
+	struct ieee80211_sta *sta,
+	u32 changed)
 {
-	struct mt7996_dev *dev = mt7996_hw_dev(hw);
-	struct ieee80211_sta *sta = link_sta->sta;
+struct mt7996_dev *dev = mt7996_hw_dev(hw);
 
-	mt7996_link_rate_ctrl_update(&changed, sta);
-	ieee80211_queue_work(hw, &dev->rc_work);
+mt7996_sta_rc_work(&changed, sta);
+ieee80211_queue_work(hw, &dev->rc_work);
 }
 
 static int
@@ -2108,7 +2107,7 @@ const struct ieee80211_ops mt7996_ops = {
 	.link_info_changed = mt7996_link_info_changed,
 	.sta_state = mt7996_sta_state,
 	.sta_pre_rcu_remove = mt76_sta_pre_rcu_remove,
-	.link_sta_rc_update = mt7996_link_sta_rc_update,
+	.sta_rc_update = mt7996_sta_rc_update,
 	.set_key = mt7996_set_key,
 	.ampdu_action = mt7996_ampdu_action,
 	.set_rts_threshold = mt7996_set_rts_threshold,
