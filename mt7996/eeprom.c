@@ -96,7 +96,7 @@ mt7996_eeprom_parse_stream(const u8 *eeprom, u8 band_idx, u8 *path,
 static void
 mt7996_eeprom_fixup_tx_power(struct mt7996_dev *dev, const u8 *def)
 {
-	u8 *eeprom = dev->mt.eeprom.data;
+	u8 *eeprom = dev->mt76.eeprom.data;
 	int i;
 	bool zeros_detected = false;
 
